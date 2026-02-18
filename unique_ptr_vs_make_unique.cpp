@@ -12,7 +12,7 @@ int main(void)
     auto modernPtr = std::make_unique<int>(10);
     std::cout << std::endl << *modernPtr;
 
-    // Stack allocation
+    // Stack allocation -> Undefined Behavior due to lack of pre memory allocation
     int foo = 0;
     std::unique_ptr<int> ptrStack(&foo);
     std::cout << std::endl << ptrStack;
