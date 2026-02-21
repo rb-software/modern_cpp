@@ -1,8 +1,10 @@
 #include <iostream>
 #include <thread>
 #include <optional>
+#include <queue>
+#include <memory>
 
-std::queue<size_t> g_resource; // < Data resource
+std::queue<size_t> g_resource {}; // < Data resource
 
 namespace generic_worker
 {
@@ -22,7 +24,7 @@ namespace generic_worker
         /**
          * @brief Constructor C++17 string_view
          */
-        GenericActivity(const std::string_view& threadName) :
+        explicit GenericActivity(const std::string_view& threadName) :
             m_running(true),
             m_liveCycle(0U),
             m_genericActivityThread(&GenericActivity::genericActivityWorker, this)
@@ -79,7 +81,7 @@ namespace generic_worker
         std::thread m_genericActivityThread;
 
         // Worker life cycle parameters
-        size_t m_liveCycle;
+        std::atomic<size_t> m_liveCycle;
         const size_t k_lifeCycles = 10U;
     };
 }
@@ -122,7 +124,7 @@ int main()
                 // Core logic leading of leading thread
                 if (g_resource.size() == k_maxSizeLimiter)
                 {
-                    std::cout << std::endl << "Maximal queue size exceeded - thread termination!";
+                    std::cerr << std::endl << "Maximal queue size exceeded - thread termination!";
                     break;
                 }
                 else if (data.has_value())
