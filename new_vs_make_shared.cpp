@@ -29,20 +29,20 @@ int main()
 {
     size_t inputData = SIZE_MAX;
 
-    // shared_ptr make_shared  
-    {
-        // -> 1 allocation Foo object and control block in one memory block
-        // -> efective and cache friendly
-        auto ptr1 = std::make_shared<Foo>(&inputData);
-        std::cout << std::endl << *static_cast<size_t*>(ptr1->getData());
-    }
-
     // shared_ptr
     {
         // -> 2 allocations, first for Foo object second for control block
         // -> old approach
         auto ptr2 = std::shared_ptr<Foo>(new Foo(&inputData));
         std::cout << std::endl << *static_cast<size_t*>(ptr2->getData());
+    }
+
+    // shared_ptr make_shared
+    {
+        // -> 1 allocation Foo object and control block in one memory block
+        // -> efective and cache friendly
+        auto ptr1 = std::make_shared<Foo>(&inputData);
+        std::cout << std::endl << *static_cast<size_t*>(ptr1->getData());
     }
 
     return 0;
