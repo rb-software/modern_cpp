@@ -1,5 +1,6 @@
 #include <string_view>
 #include <vector>
+#include <iostream>
 
 #include "pimpl.h"
 
@@ -12,6 +13,8 @@ public:
 
 Foo::Foo()
     : m_impl(std::make_unique<Impl>())
-{}
+{
+    std::cout << std::endl << m_impl->m_name;
+}
 
 Foo::~Foo() = default;
