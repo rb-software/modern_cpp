@@ -28,7 +28,7 @@ public:
         : m_ptr(nullptr)
         {}
 
-    explicit UniquePtr(T* ptr) noexcept // Raw ptr constructor
+    explicit UniquePtr(T* ptr = nullptr) noexcept // Raw ptr constructor
         : m_ptr(ptr)
         {
             std::cout << std::endl << __func__;
@@ -85,7 +85,7 @@ public:
     }
 
 private:
-    T* m_ptr;
+    T* m_ptr = nullptr;
 };
 
 int main()
