@@ -30,7 +30,7 @@ template<typename T>
 class SharedPtr
 {
 public:
-    explicit SharedPtr(T* ptr = nullptr)
+    explicit SharedPtr(T* ptr = nullptr) noexcept
         : m_ptr(ptr) 
     {
         std::cout <<std::endl << __func__ << " " << __LINE__;
@@ -47,7 +47,7 @@ public:
         }
     }
 
-    SharedPtr(const SharedPtr& other)
+    SharedPtr(const SharedPtr& other) noexcept
         : m_ptr(other.m_ptr)
         , m_control_block(other.m_control_block)
     {
@@ -59,7 +59,7 @@ public:
         } 
     }
 
-    SharedPtr& operator=(const SharedPtr& other)
+    SharedPtr& operator=(const SharedPtr& other) noexcept
     {
         std::cout <<std::endl << __func__ << " " << __LINE__;
 
@@ -81,12 +81,12 @@ public:
         return *this;
     }
 
-    ~SharedPtr()
+    ~SharedPtr() noexcept
     {
         release();
     }
 
-    size_t use_count() const
+    size_t use_count() const noexcept
     {
         return m_control_block ? m_control_block->ref_count : 0;
     }
