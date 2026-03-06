@@ -26,13 +26,13 @@ class UniquePtr
 public:
     constexpr UniquePtr() noexcept // default constructor
         : m_ptr(nullptr)
-        {}
+    {}
 
     explicit UniquePtr(T* ptr = nullptr) noexcept // Raw ptr constructor
         : m_ptr(ptr)
-        {
-            std::cout << std::endl << __func__;
-        }
+    {
+        std::cout << std::endl << __func__;
+    }
 
     UniquePtr(const UniquePtr& ptr) = delete; // copy constructor
     UniquePtr& operator=(const UniquePtr& ptr) = delete; // move assigment operator
