@@ -6,6 +6,8 @@ struct Empty
 struct Foo
 {
     int value;
+    // C++20
+    //[[no_unique_address]] 
     Empty e;
 };
 
