@@ -67,6 +67,11 @@ int main()
 
 
     cout <<  "------------------------"  << endl;
+    {
+        std::unique_ptr<A> a3 = std::make_unique<C>(); // Const A
+    }
+
+    cout <<  "------------------------"  << endl;
     A a1 = A(); // Const A
     A a2(std::move(a1));
 
