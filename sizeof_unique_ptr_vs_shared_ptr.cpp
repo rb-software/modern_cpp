@@ -1,5 +1,6 @@
 #include <iostream>
 
+// pragma allows to avoid aligment problem at the expense of performance
 #pragma pack(1)
 class Foo
 {
@@ -23,6 +24,8 @@ int main()
     std::cout << std::endl << sizeof(Foo); // 5 byte
     std::cout << std::endl << sizeof(Foo*); // 8 bytes
 
+    std::cout << std::endl << sizeof(void*); // 8 bytes
+    //std::cout << std::endl << sizeof(void); // compilation error
 
     return 0;
 }
